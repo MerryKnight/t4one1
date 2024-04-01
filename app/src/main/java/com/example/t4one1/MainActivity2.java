@@ -48,16 +48,18 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         startActivityForResult(intent, 1);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Log.d("RRR","HERE");
-        if (requestCode == 1) {
-            if (resultCode == RESULT_OK) {
-                String preferredTime = data.getStringExtra("preferredTime");
-
-                textViewChange.setText(preferredTime);
-            }
-        }
-    }
+    ActivityResultLauncher<Intent> mStartForResult =
+            registerForActivityResult(new
+                            ActivityResultContracts.StartActivityForResult(),
+                    new ActivityResultCallback<ActivityResult>() {
+                        @Override
+                        public void onActivityResult(ActivityResult result) {
+                            if(result.getResultCode() == MainActivity2.RESULT_OK)
+                            {
+                                Intent intent = result.getData();
+                                String preferredTime = data.getStringExtra("preferredTime");
+                                textViewChange.setText(preferredTime);
+                            }
+                        }
+            });
 }
