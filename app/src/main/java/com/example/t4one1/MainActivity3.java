@@ -33,6 +33,7 @@ public class MainActivity3 extends AppCompatActivity implements View.OnClickList
         Intent intent = new Intent();
         intent.putExtra("preferredTime", preferredTime);
         setResult(RESULT_OK, intent);
+        mStartForResult.launch(intent);
         Toast.makeText(MainActivity3.this, "Время занятия успешно передано", Toast.LENGTH_SHORT).show();
         finish();
     }
