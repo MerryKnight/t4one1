@@ -36,7 +36,7 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
 
         buttonEnter.setOnClickListener(this);
 
-
+        mStartForResult.launch(intent);
 
 
     }
@@ -48,7 +48,7 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         startActivityForResult(intent, 1);
     }
 
-    ActivityResultLauncher<Intent> mStartForResult =
+   ActivityResultLauncher<Intent> mStartForResult =
             registerForActivityResult(new
                             ActivityResultContracts.StartActivityForResult(),
                     new ActivityResultCallback<ActivityResult>() {
@@ -57,9 +57,9 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
                             if(result.getResultCode() == MainActivity2.RESULT_OK)
                             {
                                 Intent intent = result.getData();
-                                String preferredTime = data.getStringExtra("preferredTime");
+                                String preferredTime = intent.getStringExtra("preferredTime");
                                 textViewChange.setText(preferredTime);
                             }
                         }
-            });
+                    });
 }
